@@ -1,0 +1,1 @@
+web: gunicorn heatmaprepo.Proj2_flask_app:app
