@@ -8,7 +8,7 @@ from sqlalchemy import create_engine, func ,inspect,Table, Column, ForeignKey
 from flask import Flask, jsonify,render_template,request, redirect
 from flask_cors import CORS
 import geojson
-
+'''
 #=======================================================
 obesity_df = pd.read_csv('data_proj2.csv')
 obesity_df = obesity_df.dropna()
@@ -18,8 +18,8 @@ obesity_df =pd.DataFrame(obesity_df)
 # cdc_data_df = cdc_data_df.dropna()
 # cdc_data_df =pd.DataFrame(cdc_data_df)
 #=======================================================
-rds_connection_string = "postgres:postgres@localhost:5432/Proj2_db"
-engine = create_engine(f'postgresql://{rds_connection_string}')
+pstgres_db = "postgres:postgres@localhost:5432/Proj2_db"
+engine = create_engine(f'postgresql://{pstgres_db}')
 #https://github.com/cid-harvard/pandas-to-postgres/issues/8
 Base = automap_base()
 Base.prepare(engine, reflect=True)
@@ -31,7 +31,7 @@ session = Session(engine)
 
 obesity_df.to_sql(name='obesity_study',con=engine, if_exists='replace',index=False)
 #cdc_data_df.to_sql(name='cdc_data',con=engine, if_exists='replace',index=False)
-
+'''
 #https://geoffboeing.com/2015/10/exporting-python-data-geojson/
 def df_to_geojson(df, properties, lat='latitude', lon='longitude'):
     geojson = {'type':'FeatureCollection', 'features':[]}
