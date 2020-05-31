@@ -1,9 +1,10 @@
 import pandas as pd
 import sqlalchemy
+from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine, func ,inspect,Table, Column, ForeignKey
-from flask import Flask, jsonify
+from flask import Flask, jsonify,render_template,request, redirect
 from flask_cors import CORS
 import geojson
 
@@ -16,9 +17,13 @@ obesity_df =pd.DataFrame(obesity_df)
 # cdc_data_df = cdc_data_df.dropna()
 # cdc_data_df =pd.DataFrame(cdc_data_df)
 #=======================================================
+# DATABASE_URL will contain the database connection string:
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '')
+# Connects to the database using the app config
+db = SQLAlchemy(app)
 
-rds_connection_string = "postgres:postgres@localhost:5432/Proj2_db"
-engine = create_engine(f'postgresql://{rds_connection_string}')
+#rds_connection_string = "postgres:postgres@localhost:5432/Proj2_db"
+#engine = create_engine(f'postgresql://{rds_connection_string}')
 #https://github.com/cid-harvard/pandas-to-postgres/issues/8
 Base = automap_base()
 Base.prepare(engine, reflect=True)
